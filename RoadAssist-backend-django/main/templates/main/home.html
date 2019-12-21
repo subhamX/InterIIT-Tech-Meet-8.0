@@ -1,0 +1,48 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block alpha %}
+<div class='container' >
+    <div class='row'>
+        <div class='col-md-4'>
+            <div class="card" style="width: 18rem;">
+                <img src="{% static 'main/image1.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{ complaints|length }}</h5>
+                  <p class="card-text">Total Number of Complaints Registered.</p>
+                  {% if not user.is_authenticated %}
+                  <a href="{% url 'register' %}" class="btn btn-outline-dark">Sign Up</a>
+                  <a href="{% url 'login' %}" class="btn btn-outline-dark">Sign In</a>
+                    {% endif %}
+                </div>
+              </div>
+        </div>
+        <div class='col-md-4'>
+            <div class="card" style="width: 18rem;">
+                <img src="{% static 'main/image2.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{ cpts|length }}</h5>
+                  <p class="card-text">Total Number of Complaints Resolved.</p>
+                  {% if not user.is_authenticated %}
+                  <a href="{% url 'register' %}" class="btn btn-outline-dark">Sign Up</a>
+                  <a href="{% url 'login' %}" class="btn btn-outline-dark">Sign In</a>
+                    {% endif %}
+                </div>
+              </div>
+        </div>
+        <div class='col-md-4'>
+            <div class="card" style="width: 18rem;">
+                <img src="{% static 'main/image3.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{ roads|length }}</h5>
+                  <p class="card-text">Total Number of Roads in the Network.</p>
+                  {% if not user.is_authenticated %}
+                  <a href="{% url 'register' %}" class="btn btn-outline-dark">Sign Up</a>
+                  <a href="{% url 'login' %}" class="btn btn-outline-dark">Sign In</a>
+                    {% endif %}
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+
+{% endblock alpha %}

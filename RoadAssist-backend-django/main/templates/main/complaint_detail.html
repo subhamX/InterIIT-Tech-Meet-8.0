@@ -1,0 +1,46 @@
+{% extends "main/base.html" %}
+{% block content %}
+  
+  <article class="media content-section">
+ 
+    <div class="media-body">
+      <div class="article-metadata">
+        {% if not user.is_superuser %}
+        <a class="mr-2" href="">{{ object.registered_by }}</a>
+        {% endif %}
+        <small class="text-muted">{{ object.date_posted|date:"F d,Y" }}</small>
+        {% if object.status == '0' %}
+            <div class="alert alert-primary mt-2 mb-2" role="alert">
+                Complaint received for processing!
+              </div>
+        {% elif object.status == '1' %}
+            <div class="alert alert-warning mt-2 mb-2" role="alert">
+                Request under progress! Current Situation {{ object.status_message }}
+              </div>  
+        {% elif object.status == '2' %}
+            <div class="alert alert-success mt-2 mb-2" role="alert">
+                Request resolved from server End. Operator Comment: {{ object.status_message }}
+              </div>  
+        {% endif %}
+              
+        <!-- {% if object.author == user %}
+        <div>
+        <a href="{% url 'post-update' object.id %}" class='btn btn-secondary btn-sm mt-1 mb-1'>Update</a>
+        <a href="{% url 'post-delete' object.id %}" class='btn btn-danger btn-sm mt-1 mb-1'>Delete</a>
+        </div>
+        {% endif %} -->
+      </div>
+      <h2 class='article-title'>{{ object.road }}</h2>
+      <p class="article-content">{{ object.suggestions }}</p>
+      {% if object.image.url %}
+        <img src="{{ object.image.url }}" alt="">
+      {% endif %}
+      <p></p>
+      {% if user.is_superuser %}
+      <a href="{% url 'complaint-update' object.id %}" class='btn btn-outline-dark btn-sm mt-1 mb-1'>Update Status of Actions Taken</a>
+      {% endif %}
+    </div>
+  </article>
+  
+
+{% endblock content %}

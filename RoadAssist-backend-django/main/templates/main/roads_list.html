@@ -1,0 +1,16 @@
+{% extends "main/base.html" %}
+{% block content %}
+ 
+  {% for road in object_list %}
+  
+  <article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <h2><a class="mr-2" href="{% url 'complaint-list' road.id 0 %}"> Road Name: {{ road }}</a></h2>
+        
+      </div>
+      <h5 class='article-title'>Total No. of Unattented Complaints: {{ road.complaints }}</h5>
+    </div>
+  </article>
+  {% endfor %}
+{% endblock %}

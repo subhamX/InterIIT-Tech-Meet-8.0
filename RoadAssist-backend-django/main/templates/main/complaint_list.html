@@ -1,0 +1,28 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+  <div class='btn-group mb-2' aria-label="Basic Example">
+    <a href="{% url 'complaint-list' request.path|cut:'/complaint_list_all/'|first 0 %}" class="btn btn-danger">Just Arrived</a>
+    <a href="{% url 'complaint-list' request.path|cut:'/complaint_list_all/'|first 1 %}" class='btn btn-warning'>In Progress</a>
+    <a href="{% url 'complaint-list' request.path|cut:'/complaint_list_all/'|first 2 %}" class='btn btn-success'>Resolved</a>
+  </div>
+  {% if object_list %}
+  {% for complaint in object_list %}
+  
+  <article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="">{{ complaint.registered_by }}</a>
+        <small class="text-muted">{{ complaint.date_posted|date:"F d,Y" }}</small>
+      </div>
+      <h2><a class="article-title" href="{% url 'complaint-detail' complaint.id %}">{{ complaint.road }}</a></h2>
+      <p class="article-content">{{ complaint.suggestions }}</p>
+    </div>
+  </article>
+  {% endfor %}
+  {% else %}
+  
+  <h2>Woo Hoo ! Nothing Here...</h2>
+  {% endif %}
+{% endblock %}
